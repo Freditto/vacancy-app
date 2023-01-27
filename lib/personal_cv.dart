@@ -20,15 +20,24 @@ class _Personal_CV_ScreenState extends State<Personal_CV_Screen> {
 
     List<Step> steps = [
       Step(
-        title: Text('Personal'),
+        title: Icon(Icons.person_rounded),
         content: Personal(),
         state: currentStep == 0 ? StepState.editing : StepState.indexed,
         isActive: true,
       ),
+      
+
       Step(
-        title: Text('Contact'),
-        content: Contact(),
+        title: Icon(Icons.account_balance_outlined),
+        content: Professional_Qualification(),
         state: currentStep == 1 ? StepState.editing : StepState.indexed,
+        isActive: true,
+      ),
+
+      Step(
+        title: Icon(Icons.account_balance_outlined),
+        content: WorkingExperience(),
+        state: currentStep == 2 ? StepState.editing : StepState.indexed,
         isActive: true,
       ),
       // Step(
@@ -43,6 +52,9 @@ class _Personal_CV_ScreenState extends State<Personal_CV_Screen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Update CV'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        
       ),
       body: Container(
         child: Stepper(

@@ -42,6 +42,9 @@ dependencies:
   survey_kit: ^0.1.1
   flutter_blurhash: ^0.6.4
 
+  intl: ^0.17.0
+  fa_stepper: ^0.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:survey_kit/survey_kit.dart';
+import 'package:vacancies_app/aptitude_test.dart';
 import 'package:vacancies_app/components/icon_text.dart';
 import 'package:vacancies_app/home.dart';
 
@@ -163,6 +165,10 @@ class _JobDetailState extends State<JobDetail> {
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {
                       Navigator.pop(context);
+                      
+                      Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => AptitudeTestScreen()));
+                      
                     },
                     child: Text('Apply Now'),
                   ),

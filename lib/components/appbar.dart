@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:vacancies_app/notification.dart';
 import 'package:vacancies_app/profile.dart';
@@ -74,7 +74,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           ),
                           Positioned(
                             right: 0,
-                            child: Badge(
+                            child: badge.Badge(
                               badgeContent: Text(
                                 '0',
                                 style: const TextStyle(color: Colors.white),

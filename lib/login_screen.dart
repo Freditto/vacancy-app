@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vacancies_app/api/api.dart';
 import 'package:vacancies_app/components/authentication_button.dart';
 import 'package:vacancies_app/components/constants.dart';
 import 'package:vacancies_app/components/curve.dart';
@@ -20,6 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   String username = '';
   String password = '';
+
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController userPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,67 +101,78 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       // Second Column
-                      Column(
-                        children: [
-                          CustomTextField(
-                            hintText: 'Username',
-                            icon: Icons.person,
-                            keyboardType: TextInputType.name,
-                            onChanged: (value) {
-                              username = value != '' ? value : '';
-                            },
-                          ),
-                          CustomTextField(
-                            hintText: 'Password',
-                            icon: Icons.lock,
-                            obscureText: true,
-                            keyboardType: TextInputType.visiblePassword,
-                            onChanged: (value) {
-                              password = value != '' ? value : '';
-                            },
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      checkColor: Colors.white,
-                                      fillColor: MaterialStateProperty.all(
-                                          kDarkGreenColor),
-                                      value: rememberMe,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          rememberMe = value!;
-                                        });
-                                      },
-                                    ),
-                                    Text(
-                                      'Remember Me',
-                                      style: TextStyle(
-                                        color: kGreyColor,
-                                        fontSize: 14.0,
-                                      ),
-                                    )
-                                  ],
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: userNameController,
+                              validator: validateUsername,
+                              // keyboardType: TextInputType.phone,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(18.0),
+                                filled: true,
+                                fillColor: kGinColor,
+                                prefixIcon: Icon(
+                                  Icons.person_outline,
+                                  size: 24.0,
+                                  color: kDarkGreenColor,
                                 ),
-                                TextButton(
-                                  onPressed: () {},
-                                  style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all(
-                                        kDarkGreenColor),
-                                  ),
-                                  child: const Text(
-                                    'Forgot Password ?',
-                                  ),
-                                )
-                              ],
+                                hintText: 'Username',
+                                hintStyle: GoogleFonts.poppins(
+                                  color: kDarkGreenColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15.0,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: kGinColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      BorderSide(color: kDarkGreenColor),
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            TextFormField(
+                              controller: userPasswordController,
+                              obscureText: true,
+                              validator: validatePassword,
+                              // keyboardType: TextInputType.phone,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(18.0),
+                                filled: true,
+                                fillColor: kGinColor,
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  size: 24.0,
+                                  color: kDarkGreenColor,
+                                ),
+                                hintText: 'Password',
+                                hintStyle: GoogleFonts.poppins(
+                                  color: kDarkGreenColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15.0,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: kGinColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      BorderSide(color: kDarkGreenColor),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
 
                       // Third Column
@@ -169,13 +188,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             AuthenticationButton(
                               label: 'Log In',
                               onPressed: () {
+                                _submit();
                                 // if (username.toLowerCase() == 'admin' &&
                                 //     password == 'idk123!') {
                                 //   // Navigator.pushNamed(context, MainScreen.id);
                                 // }
 
                                 Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
                               },
                             ),
                             Padding(
@@ -195,7 +217,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     onPressed: () {
                                       Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => SignupScreen()));
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SignupScreen()));
                                     },
                                     child: const Text(
                                       'Sign up',
@@ -217,5 +242,103 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  String? validateEmail(String? value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value!))
+      return 'Enter Valid Email';
+    else
+      return null;
+  }
+
+  String? validateUsername(String? value) {
+// Indian Mobile number are of 10 digit only
+    if (value!.length == 0)
+      return 'Username Field must not be empty';
+    // else if(value.length < 8)
+    //   return 'Password must be of 8 or more digit';
+    else
+      return null;
+  }
+
+  String? validatePassword(String? value) {
+// Indian Mobile number are of 10 digit only
+    if (value!.length == 0)
+      return 'Password Field must not be empty';
+    else if (value.length < 8)
+      return 'Password must be of 8 or more digit';
+    else
+      return null;
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      // TODO SAVE DATA
+      _login();
+    }
+  }
+
+
+  void _login() async {
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    // var number = userNumberController.text;
+    // print(_countryCodes);
+    // var code = _selectedCountryCode
+    //     .toString()
+    //     .substring(1, _selectedCountryCode.toString().length);
+    // if (number.length == 10) {
+    //   number = number.substring(1, number.length);
+    // }
+    // var cellphone = code + number;
+
+// *************************************************
+    var data = {
+      'username': userNameController.text,
+      'password': userPasswordController.text,
+    };
+
+    print(data);
+
+    var res = await CallApi().authenticatedPostRequest(data, 'login');
+    if (res == null) {
+      // setState(() {
+      //   _isLoading = false;
+      //   // _not_found = true;
+      // });
+      // showSnack(context, 'No Network!');
+    } else {
+      var body = json.decode(res!.body);
+      print(body);
+
+      if (res.statusCode == 200) {
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        // localStorage.setString("token", body['token']);
+        localStorage.setString("user", json.encode(body));
+        localStorage.setString("token", json.encode(body['token']));
+        // localStorage.setString("stationary", json.encode(body['stationary']));
+        // localStorage.setString("phone_number", userNumberController.text);
+
+        // setState(() {
+        //   _isLoading = false;
+        // });
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      } else if (res.statusCode == 400) {
+        print('hhh');
+        // setState(() {
+        //   _isLoading = false;
+        //   _not_found = true;
+        // });
+      } else {}
+    }
+
+    // ignore: avoid_print
   }
 }

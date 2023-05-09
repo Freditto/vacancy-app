@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vacancies_app/edit_profile.dart';
+import 'package:vacancies_app/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -7,9 +11,48 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  var userData;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+    _getUserInfo();
+
+   
+  }
+
+  
+
+  checkLoginStatus() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString("token") == null) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    }
+  }
+
+  void _getUserInfo() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var userJson = localStorage.getString('user');
+    var user = json.decode(userJson!);
+    setState(() {
+      userData = user;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        elevation: 0,
+        title: Text('Profile'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

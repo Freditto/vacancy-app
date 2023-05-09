@@ -20,7 +20,7 @@ class _Personal_CV_ScreenState extends State<Personal_CV_Screen> {
 
     List<Step> steps = [
       Step(
-        title: Icon(Icons.person_rounded),
+        title: Icon(Icons.person_2_outlined),
         content: Personal(),
         state: currentStep == 0 ? StepState.editing : StepState.indexed,
         isActive: true,
@@ -28,7 +28,7 @@ class _Personal_CV_ScreenState extends State<Personal_CV_Screen> {
       
 
       Step(
-        title: Icon(Icons.account_balance_outlined),
+        title: Icon(Icons.school_outlined),
         content: Professional_Qualification(),
         state: currentStep == 1 ? StepState.editing : StepState.indexed,
         isActive: true,
@@ -40,17 +40,19 @@ class _Personal_CV_ScreenState extends State<Personal_CV_Screen> {
         state: currentStep == 2 ? StepState.editing : StepState.indexed,
         isActive: true,
       ),
-      // Step(
-      //   title: Text('Upload'),
-      //   content: Upload(mapData),
-      //   state: StepState.complete,
-      //   isActive: true,
-      // ),
+      Step(
+        title: Icon(Icons.article_outlined),
+        content: FileUploads(),
+        state: StepState.complete,
+        isActive: true,
+      ),
     ];
 
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+        elevation: 0,
         title: Text('Update CV'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

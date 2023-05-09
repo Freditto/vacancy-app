@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,7 +25,6 @@ class PersonalState extends State<Personal> {
   static TextEditingController controllerEmail = new TextEditingController();
   static TextEditingController controllerAddress = new TextEditingController();
   static TextEditingController controllerMobileNo = new TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -125,10 +128,7 @@ class PersonalState extends State<Personal> {
                 ),
               ),
               controller: controllerGender),
-
-
           SizedBox(height: 20),
-
           TextFormField(
             maxLines: 1,
             decoration: InputDecoration(
@@ -149,7 +149,6 @@ class PersonalState extends State<Personal> {
             controller: controllerEmail,
           ),
           SizedBox(height: 20),
-          
           TextFormField(
             maxLines: 1,
             decoration: InputDecoration(
@@ -306,8 +305,8 @@ class _Professional_QualificationState
 
           Container(
             // padding: const EdgeInsets.all(0.0),
-            padding: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 0, bottom: 0),
+            padding:
+                EdgeInsets.only(left: 10.0, right: 10.0, top: 0, bottom: 0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(12)),
@@ -393,7 +392,6 @@ class _Professional_QualificationState
             controller: controllerMobileNo,
           ),
 
-
           // TextFormField(
           //   minLines: 5,
           //   maxLines: 7,
@@ -410,32 +408,27 @@ class _Professional_QualificationState
           //   controller: controllerAddress,
           // ),
           SizedBox(height: 20),
-          
         ],
       ),
     ));
   }
 }
 
-
 class WorkingExperience extends StatefulWidget {
   @override
-  State<WorkingExperience> createState() =>
-      _WorkingExperienceState();
+  State<WorkingExperience> createState() => _WorkingExperienceState();
 }
 
-class _WorkingExperienceState
-    extends State<WorkingExperience> {
+class _WorkingExperienceState extends State<WorkingExperience> {
   static final formKey = GlobalKey<FormState>();
   static TextEditingController controllerEmail = new TextEditingController();
   static TextEditingController controllerAddress = new TextEditingController();
   static TextEditingController controllerMobileNo = new TextEditingController();
 
-   static TextEditingController controllerStartDate =
+  static TextEditingController controllerStartDate =
       new TextEditingController();
 
-  static TextEditingController controllerEndiDate =
-      new TextEditingController();
+  static TextEditingController controllerEndiDate = new TextEditingController();
 
   String? chooseEducationValue;
 
@@ -469,7 +462,6 @@ class _WorkingExperienceState
           ),
           SizedBox(height: 20),
 
-
           TextFormField(
             maxLines: 1,
             decoration: InputDecoration(
@@ -490,7 +482,6 @@ class _WorkingExperienceState
             controller: controllerEmail,
           ),
           SizedBox(height: 20),
-
 
           TextFormField(
             maxLines: 1,
@@ -575,9 +566,7 @@ class _WorkingExperienceState
               },
               controller: controllerStartDate),
 
-
           SizedBox(height: 20),
-
 
           TextFormField(
               maxLines: 1,
@@ -620,7 +609,6 @@ class _WorkingExperienceState
               },
               controller: controllerEndiDate),
 
-
           // TextFormField(
           //   minLines: 5,
           //   maxLines: 7,
@@ -637,9 +625,88 @@ class _WorkingExperienceState
           //   controller: controllerAddress,
           // ),
           SizedBox(height: 20),
-          
         ],
       ),
     ));
+  }
+}
+
+class FileUploads extends StatefulWidget {
+  @override
+  State<FileUploads> createState() => _FileUploadsState();
+}
+
+class _FileUploadsState extends State<FileUploads> {
+
+  _selecFiles() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      List<File> files = result.paths.map((path) => File(path!)).toList();
+
+      print(files);
+    } else {
+      // User canceled the picker
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 10, right: 10, left: 10),
+            child: DottedBorder(
+              color: Colors.grey,
+              strokeWidth: 2,
+              borderType: BorderType.RRect,
+              radius: Radius.circular(8),
+              dashPattern: [15, 10],
+              child: GestureDetector(
+                onTap: () {
+                  _selecFiles();
+                },
+                child: Center(
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        100,
+                      ),
+                      color: Colors.grey[300],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // SvgPicture.asset(
+                        //   'assets/image.svg',
+                        //   width: 32,
+                        //   color: Colors.black,
+                        // ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          'No pdf file Selected',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

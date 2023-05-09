@@ -12,48 +12,52 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
-        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: true,
         elevation: 0,
-        actions: [],
+        title: Text('Edit Profile'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32),
-        physics: BouncingScrollPhysics(),
-        children: [
-          Center(
-            child: Stack(
-              children: [
-                buildImage(),
-                Positioned(
-                  bottom: 0,
-                  right: 4,
-                  child: buildEditIcon(Colors.blue),
-                ),
-              ],
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 32),
+          physics: BouncingScrollPhysics(),
+          children: [
+            Center(
+              child: Stack(
+                children: [
+                  buildImage(),
+                  Positioned(
+                    bottom: 0,
+                    right: 4,
+                    child: buildEditIcon(Colors.blue),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'Full Name',
-            text: 'user.name',
-            onChanged: (name) {},
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'Email',
-            text: 'user.email',
-            onChanged: (email) {},
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'About',
-            text: 'user.about',
-            maxLines: 5,
-            onChanged: (about) {},
-          ),
-          const SizedBox(height: 10),
-        ],
+            const SizedBox(height: 24),
+            TextFieldWidget(
+              label: 'Full Name',
+              text: 'user.name',
+              onChanged: (name) {},
+            ),
+            const SizedBox(height: 24),
+            TextFieldWidget(
+              label: 'Email',
+              text: 'user.email',
+              onChanged: (email) {},
+            ),
+            const SizedBox(height: 24),
+            TextFieldWidget(
+              label: 'About',
+              text: 'user.about',
+              maxLines: 5,
+              onChanged: (about) {},
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

@@ -249,28 +249,50 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+                children: <Widget>[
                   CircleAvatar(
                     backgroundColor: Colors.white70,
                     minRadius: 40.0,
                     child: CircleAvatar(
                       radius: 40.0,
-                      backgroundImage: AssetImage("assets/user1.jpg"),
+                      backgroundImage: AssetImage("assets/userx.jpg"),
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
+
+                  userData == null ?
                   Text(
-                    'Leonardo Palmeiro',
+                    '',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  )
+                  :
+
+                  Text(
+                    userData['username'].toString(),
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
+
+                  userData == null ?
                   Text(
-                    'Flutter Developer',
+                    '',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  )
+                  :
+                  Text(
+                    userData['email'].toString(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,

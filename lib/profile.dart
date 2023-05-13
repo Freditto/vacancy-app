@@ -65,9 +65,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
+                          userData == null ?
                           Text(
-                            "Fullname",
+                            "",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                          :
+                          Text(
+                            userData['username'].toString(),
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -76,8 +85,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 5,
                           ),
+
+                          userData == null ?
                           Text(
-                            "email@example.com",
+                            "",
+                            style: TextStyle(
+                              color: Colors.black38,
+                            ),
+                          ) 
+                          :
+                          Text(
+                            userData['email'].toString(),
                             style: TextStyle(
                               color: Colors.black38,
                             ),
@@ -91,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.blueAccent,
                             image: const DecorationImage(
-                                image: AssetImage("assets/user1.jpg"),
+                                image: AssetImage("assets/userx.jpg"),
                                 fit: BoxFit.cover)),
                       ),
                     ],

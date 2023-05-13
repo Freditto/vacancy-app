@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vacancies_app/admin_auth.dart';
 import 'package:vacancies_app/api/api.dart';
 import 'package:vacancies_app/components/authentication_button.dart';
 import 'package:vacancies_app/components/constants.dart';
@@ -82,12 +83,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            'Welcome Back',
-                            style: GoogleFonts.poppins(
-                              fontSize: 32.0,
-                              fontWeight: FontWeight.w600,
-                              color: kDarkGreenColor,
+                          InkWell(
+
+                            onTap: () {
+                              Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminLoginScreen()));
+                            },
+                            child: Text(
+                              'Welcome Back',
+                              style: GoogleFonts.poppins(
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.w600,
+                                color: kDarkGreenColor,
+                              ),
                             ),
                           ),
                           Text(

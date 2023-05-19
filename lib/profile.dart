@@ -6,6 +6,8 @@ import 'package:vacancies_app/edit_profile.dart';
 import 'package:vacancies_app/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -29,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -48,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         elevation: 0,
-        title: Text('Profile'),
+        title: const Text('Profile'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         
@@ -67,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           userData == null ?
-                          Text(
+                          const Text(
                             "",
                             style: TextStyle(
                               fontSize: 20,
@@ -77,17 +79,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           :
                           Text(
                             userData['username'].toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
 
                           userData == null ?
-                          Text(
+                          const Text(
                             "",
                             style: TextStyle(
                               color: Colors.black38,
@@ -96,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           :
                           Text(
                             userData['email'].toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black38,
                             ),
                           ),
@@ -120,29 +122,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50.0, ),
                   child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 25),
+                      margin: const EdgeInsets.symmetric(vertical: 25),
                       height: 45,
                       width: double.maxFinite,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            primary: Theme.of(context).primaryColor,
+                            elevation: 0, backgroundColor: Theme.of(context).primaryColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         onPressed: () {
                           // Navigator.pop(context);
 
                           Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => EditProfileScreen()));
+                  context, MaterialPageRoute(builder: (context) => const EditProfileScreen()));
                         },
-                        child: Text('Update Profile'),
+                        child: const Text('Update Profile'),
                       ),
                     ),
                 ),
 
                 
 
-              Text('Personal Information',
+              const Text('Personal Information',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
 
 
@@ -150,17 +151,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Fullname',
                             style: TextStyle(
@@ -188,7 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 'Email',
                                 style: TextStyle(
@@ -217,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Gender',
                             style: TextStyle(
@@ -244,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Phone Nmuber',
                             style: TextStyle(
@@ -274,24 +275,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              Text('Proffesional Qualification',
+              const Text('Proffesional Qualification',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Fullname',
                             style: TextStyle(
@@ -319,7 +320,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 'Email',
                                 style: TextStyle(
@@ -348,7 +349,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Gender',
                             style: TextStyle(
@@ -375,141 +376,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Phone Nmuber',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '+255786985783',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      
-                      SizedBox(height: 15),
-
-
-                      
-                      
-                    ],
-                  ),
-                ),
-              ),
-
-              Text('Language Preferences',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Fullname',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Firstname Lastname',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                'Email',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'email@example.com',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(
-                        height: 15,
-                      ),
-
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Gender',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Male',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      
-                      SizedBox(height: 15),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Phone Nmuber',
                             style: TextStyle(
@@ -542,24 +409,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              Text('Working Experience',
+              const Text('Language Preferences',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Fullname',
                             style: TextStyle(
@@ -587,7 +454,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 'Email',
                                 style: TextStyle(
@@ -616,7 +483,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Gender',
                             style: TextStyle(
@@ -643,7 +510,141 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
+                          Text(
+                            'Phone Nmuber',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            '+255786985783',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
+                      
+                      SizedBox(height: 15),
+
+
+                      
+                      
+                    ],
+                  ),
+                ),
+              ),
+
+              const Text('Working Experience',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Fullname',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Firstname Lastname',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Email',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'email@example.com',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                        height: 15,
+                      ),
+
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Gender',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Male',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
+                      
+                      SizedBox(height: 15),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Text(
                             'Phone Nmuber',
                             style: TextStyle(

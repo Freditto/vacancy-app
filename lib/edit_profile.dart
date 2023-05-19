@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:vacancies_app/components/textfield_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
+
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
@@ -14,15 +15,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         elevation: 0,
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         
       ),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 32),
-          physics: BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          physics: const BouncingScrollPhysics(),
           children: [
             Center(
               child: Stack(
@@ -63,7 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget buildImage() {
-    final image = AssetImage("assets/user1.jpg");
+    const image = AssetImage("assets/user1.jpg");
 
     return ClipOval(
       child: Material(
@@ -85,7 +86,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: buildCircle(
           color: color,
           all: 8,
-          child: Icon(
+          child: const Icon(
             Icons.edit,
             // isEdit ? Icons.add_a_photo : Icons.edit,
             color: Colors.white,

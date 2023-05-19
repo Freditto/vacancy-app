@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vacancies_app/home.dart';
-import 'package:vacancies_app/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
       // routes: {
       //   LoginScreen.id: (context) => const LoginScreen(),
       //   SignupScreen.id: (context) => const SignupScreen(),

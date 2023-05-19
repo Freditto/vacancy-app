@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Personal extends StatefulWidget {
+  const Personal({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,15 +18,15 @@ class Personal extends StatefulWidget {
 class PersonalState extends State<Personal> {
   static final formKey = GlobalKey<FormState>();
   static TextEditingController controllerFirstName =
-      new TextEditingController();
-  static TextEditingController controllerLastName = new TextEditingController();
+      TextEditingController();
+  static TextEditingController controllerLastName = TextEditingController();
   static TextEditingController controllerDateOfBirth =
-      new TextEditingController();
-  static TextEditingController controllerGender = new TextEditingController();
+      TextEditingController();
+  static TextEditingController controllerGender = TextEditingController();
 
-  static TextEditingController controllerEmail = new TextEditingController();
-  static TextEditingController controllerAddress = new TextEditingController();
-  static TextEditingController controllerMobileNo = new TextEditingController();
+  static TextEditingController controllerEmail = TextEditingController();
+  static TextEditingController controllerAddress = TextEditingController();
+  static TextEditingController controllerMobileNo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,8 @@ class PersonalState extends State<Personal> {
           TextFormField(
             maxLines: 1,
             controller: controllerFirstName,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.person,
                 color: Colors.grey,
               ),
@@ -49,16 +51,18 @@ class PersonalState extends State<Personal> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "First Name is Required";
               // }
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
               maxLines: 1,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
                   Icons.person,
                   color: Colors.grey,
                 ),
@@ -68,16 +72,18 @@ class PersonalState extends State<Personal> {
                 ),
               ),
               validator: (value) {
+                return null;
+              
                 // if (value.trim().isEmpty) {
                 //   return "Last Name is Required";
                 // }
               },
               controller: controllerLastName),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
               maxLines: 1,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
                   Icons.calendar_today,
                   color: Colors.grey,
                 ),
@@ -114,11 +120,11 @@ class PersonalState extends State<Personal> {
                 }
               },
               controller: controllerDateOfBirth),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
               maxLines: 1,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
                   Icons.person,
                   color: Colors.grey,
                 ),
@@ -128,11 +134,11 @@ class PersonalState extends State<Personal> {
                 ),
               ),
               controller: controllerGender),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.email,
                 color: Colors.grey,
               ),
@@ -142,17 +148,19 @@ class PersonalState extends State<Personal> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.phone,
                 color: Colors.grey,
               ),
@@ -162,6 +170,8 @@ class PersonalState extends State<Personal> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
@@ -175,6 +185,8 @@ class PersonalState extends State<Personal> {
 }
 
 class Contact extends StatefulWidget {
+  const Contact({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -184,9 +196,9 @@ class Contact extends StatefulWidget {
 
 class ContactState extends State<Contact> {
   static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = new TextEditingController();
-  static TextEditingController controllerAddress = new TextEditingController();
-  static TextEditingController controllerMobileNo = new TextEditingController();
+  static TextEditingController controllerEmail = TextEditingController();
+  static TextEditingController controllerAddress = TextEditingController();
+  static TextEditingController controllerMobileNo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -199,8 +211,8 @@ class ContactState extends State<Contact> {
         children: <Widget>[
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.email,
                 color: Colors.grey,
               ),
@@ -210,18 +222,20 @@ class ContactState extends State<Contact> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
             minLines: 5,
             maxLines: 7,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.home,
                 color: Colors.grey,
               ),
@@ -232,11 +246,11 @@ class ContactState extends State<Contact> {
             ),
             controller: controllerAddress,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(
                 Icons.phone,
                 color: Colors.grey,
               ),
@@ -246,6 +260,8 @@ class ContactState extends State<Contact> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
@@ -259,6 +275,8 @@ class ContactState extends State<Contact> {
 }
 
 class Professional_Qualification extends StatefulWidget {
+  const Professional_Qualification({super.key});
+
   @override
   State<Professional_Qualification> createState() =>
       _Professional_QualificationState();
@@ -267,9 +285,9 @@ class Professional_Qualification extends StatefulWidget {
 class _Professional_QualificationState
     extends State<Professional_Qualification> {
   static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = new TextEditingController();
-  static TextEditingController controllerAddress = new TextEditingController();
-  static TextEditingController controllerMobileNo = new TextEditingController();
+  static TextEditingController controllerEmail = TextEditingController();
+  static TextEditingController controllerAddress = TextEditingController();
+  static TextEditingController controllerMobileNo = TextEditingController();
 
   String? chooseEducationValue;
 
@@ -284,7 +302,7 @@ class _Professional_QualificationState
         children: <Widget>[
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.email,
               //   color: Colors.grey,
@@ -295,18 +313,20 @@ class _Professional_QualificationState
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           Container(
             // padding: const EdgeInsets.all(0.0),
             padding:
-                EdgeInsets.only(left: 10.0, right: 10.0, top: 0, bottom: 0),
+                const EdgeInsets.only(left: 10.0, right: 10.0, top: 0, bottom: 0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(12)),
@@ -315,13 +335,13 @@ class _Professional_QualificationState
               //elevation: 5,
               // style: TextStyle(color: Colors.black),
 
-              hint: Text('Select Education Level'),
+              hint: const Text('Select Education Level'),
               dropdownColor: Colors.white,
-              icon: Icon(Icons.arrow_drop_down),
+              icon: const Icon(Icons.arrow_drop_down),
               iconSize: 36,
               isExpanded: true,
-              underline: SizedBox(),
-              style: TextStyle(color: Colors.black, fontSize: 15),
+              underline: const SizedBox(),
+              style: const TextStyle(color: Colors.black, fontSize: 15),
 
               items: <String>[
                 'Bachelor',
@@ -348,11 +368,11 @@ class _Professional_QualificationState
             ),
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.phone,
               //   color: Colors.grey,
@@ -363,6 +383,8 @@ class _Professional_QualificationState
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
@@ -370,11 +392,11 @@ class _Professional_QualificationState
             controller: controllerMobileNo,
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.phone,
               //   color: Colors.grey,
@@ -385,6 +407,8 @@ class _Professional_QualificationState
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
@@ -407,7 +431,7 @@ class _Professional_QualificationState
           //   ),
           //   controller: controllerAddress,
           // ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     ));
@@ -415,20 +439,22 @@ class _Professional_QualificationState
 }
 
 class WorkingExperience extends StatefulWidget {
+  const WorkingExperience({super.key});
+
   @override
   State<WorkingExperience> createState() => _WorkingExperienceState();
 }
 
 class _WorkingExperienceState extends State<WorkingExperience> {
   static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = new TextEditingController();
-  static TextEditingController controllerAddress = new TextEditingController();
-  static TextEditingController controllerMobileNo = new TextEditingController();
+  static TextEditingController controllerEmail = TextEditingController();
+  static TextEditingController controllerAddress = TextEditingController();
+  static TextEditingController controllerMobileNo = TextEditingController();
 
   static TextEditingController controllerStartDate =
-      new TextEditingController();
+      TextEditingController();
 
-  static TextEditingController controllerEndiDate = new TextEditingController();
+  static TextEditingController controllerEndiDate = TextEditingController();
 
   String? chooseEducationValue;
 
@@ -443,7 +469,7 @@ class _WorkingExperienceState extends State<WorkingExperience> {
         children: <Widget>[
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.email,
               //   color: Colors.grey,
@@ -454,17 +480,19 @@ class _WorkingExperienceState extends State<WorkingExperience> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.email,
               //   color: Colors.grey,
@@ -475,17 +503,19 @@ class _WorkingExperienceState extends State<WorkingExperience> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.email,
               //   color: Colors.grey,
@@ -496,17 +526,19 @@ class _WorkingExperienceState extends State<WorkingExperience> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
             maxLines: 1,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               // prefixIcon: const Icon(
               //   Icons.email,
               //   color: Colors.grey,
@@ -517,18 +549,20 @@ class _WorkingExperienceState extends State<WorkingExperience> {
               ),
             ),
             validator: (value) {
+              return null;
+            
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
             controller: controllerEmail,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
               maxLines: 1,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
                   Icons.calendar_today,
                   color: Colors.grey,
                 ),
@@ -566,12 +600,12 @@ class _WorkingExperienceState extends State<WorkingExperience> {
               },
               controller: controllerStartDate),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           TextFormField(
               maxLines: 1,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
                   Icons.calendar_today,
                   color: Colors.grey,
                 ),
@@ -624,7 +658,7 @@ class _WorkingExperienceState extends State<WorkingExperience> {
           //   ),
           //   controller: controllerAddress,
           // ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     ));
@@ -632,6 +666,8 @@ class _WorkingExperienceState extends State<WorkingExperience> {
 }
 
 class FileUploads extends StatefulWidget {
+  const FileUploads({super.key});
+
   @override
   State<FileUploads> createState() => _FileUploadsState();
 }
@@ -661,8 +697,8 @@ class _FileUploadsState extends State<FileUploads> {
               color: Colors.grey,
               strokeWidth: 2,
               borderType: BorderType.RRect,
-              radius: Radius.circular(8),
-              dashPattern: [15, 10],
+              radius: const Radius.circular(8),
+              dashPattern: const [15, 10],
               child: GestureDetector(
                 onTap: () {
                   _selecFiles();
@@ -671,7 +707,7 @@ class _FileUploadsState extends State<FileUploads> {
                   child: Container(
                     width: 100,
                     height: 100,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         horizontal: 18, vertical: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
@@ -679,7 +715,7 @@ class _FileUploadsState extends State<FileUploads> {
                       ),
                       color: Colors.grey[300],
                     ),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // SvgPicture.asset(

@@ -12,9 +12,9 @@ class AptitudeTestScreen extends StatefulWidget {
   final String jobid, company;
 
   // bool is_secured, is_folder;
-  AptitudeTestScreen(
+  const AptitudeTestScreen(
     this.jobid,
-    this.company,
+    this.company, {super.key}
   );
 
   @override
@@ -37,7 +37,7 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -53,7 +53,7 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
 
   fetchQuestionData() async {
     // var customer = userData['id'].toString();
-    String url = 'api/getQuestion/' + widget.jobid.toString();
+    String url = 'api/getQuestion/${widget.jobid}';
     // if (next != null) {
     //   url = url_format(next);
     // }
@@ -64,20 +64,20 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
       var body = json.decode(res.body);
       print(body);
       var questionItensJson = body;
-      List<Question_Item> _question_items = [];
+      List<Question_Item> questionItems0 = [];
       if (next != null) {
-        _question_items = question_data!;
+        questionItems0 = question_data!;
       }
 
       for (var f in questionItensJson) {
-        Question_Item question_items = Question_Item(
+        Question_Item questionItems = Question_Item(
           f['id'].toString(),
           f['question'].toString(),
           f['answer'],
         );
-        _question_items.add(question_items);
+        questionItems0.add(questionItems);
       }
-      print(_question_items.length);
+      print(questionItems0.length);
       // setState(() {
       //   loading = false;
       // });
@@ -85,7 +85,7 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
       // setState(() {
       //   question_data = _question_items;
       // });
-      return _question_items;
+      return questionItems0;
     } else {
       showSnack(context, 'No network');
       return [];
@@ -113,18 +113,12 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                   },
                   task: task,
                   showProgress: true,
-                  localizations: {
+                  localizations: const {
                     'cancel': 'Cancel',
                     'next': 'Next',
                   },
                   themeData: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.fromSwatch(
-                      primarySwatch: Colors.cyan,
-                    ).copyWith(
-                      onPrimary: Colors.white,
-                    ),
                     primaryColor: Colors.black,
-                    backgroundColor: Colors.white,
                     appBarTheme: const AppBarTheme(
                       color: Colors.white,
                       elevation: 0,
@@ -138,27 +132,27 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                     iconTheme: const IconThemeData(
                       color: Colors.black,
                     ),
-                    textSelectionTheme: TextSelectionThemeData(
+                    textSelectionTheme: const TextSelectionThemeData(
                       cursorColor: Colors.black,
                       selectionColor: Colors.black,
                       selectionHandleColor: Colors.black,
                     ),
-                    cupertinoOverrideTheme: CupertinoThemeData(
+                    cupertinoOverrideTheme: const CupertinoThemeData(
                       primaryColor: Colors.black,
                     ),
                     outlinedButtonTheme: OutlinedButtonThemeData(
                       style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(
-                          Size(150.0, 60.0),
+                          const Size(150.0, 60.0),
                         ),
                         side: MaterialStateProperty.resolveWith(
                           (Set<MaterialState> state) {
                             if (state.contains(MaterialState.disabled)) {
-                              return BorderSide(
+                              return const BorderSide(
                                 color: Colors.black,
                               );
                             }
-                            return BorderSide(
+                            return const BorderSide(
                               color: Colors.black,
                             );
                           },
@@ -173,12 +167,12 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                             if (state.contains(MaterialState.disabled)) {
                               return Theme.of(context)
                                   .textTheme
-                                  .button
+                                  .labelLarge
                                   ?.copyWith(
                                     color: Colors.black,
                                   );
                             }
-                            return Theme.of(context).textTheme.button?.copyWith(
+                            return Theme.of(context).textTheme.labelLarge?.copyWith(
                                   color: Colors.black,
                                 );
                           },
@@ -188,35 +182,39 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                     textButtonTheme: TextButtonThemeData(
                       style: ButtonStyle(
                         textStyle: MaterialStateProperty.all(
-                          Theme.of(context).textTheme.button?.copyWith(
+                          Theme.of(context).textTheme.labelLarge?.copyWith(
                                 color: Colors.cyan,
                               ),
                         ),
                       ),
                     ),
-                    textTheme: TextTheme(
-                      headline2: TextStyle(
+                    textTheme: const TextTheme(
+                      displayMedium: TextStyle(
                         fontSize: 28.0,
                         color: Colors.black,
                       ),
-                      headline5: TextStyle(
+                      headlineSmall: TextStyle(
                         fontSize: 24.0,
                         color: Colors.black,
                       ),
-                      bodyText2: TextStyle(
+                      bodyMedium: TextStyle(
                         fontSize: 18.0,
                         color: Colors.black,
                       ),
-                      subtitle1: TextStyle(
+                      titleMedium: TextStyle(
                         fontSize: 18.0,
                         color: Colors.black,
                       ),
                     ),
-                    inputDecorationTheme: InputDecorationTheme(
+                    inputDecorationTheme: const InputDecorationTheme(
                       labelStyle: TextStyle(
                         color: Colors.black,
                       ),
-                    ),
+                    ), colorScheme: ColorScheme.fromSwatch(
+                      primarySwatch: Colors.cyan,
+                    ).copyWith(
+                      onPrimary: Colors.white,
+                    ).copyWith(background: Colors.white),
                   ),
                   surveyProgressbarConfiguration:
                       step.SurveyProgressConfiguration(
@@ -224,7 +222,7 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                   ),
                 );
               }
-              return CircularProgressIndicator.adaptive();
+              return const CircularProgressIndicator.adaptive();
             },
           ),
         ),

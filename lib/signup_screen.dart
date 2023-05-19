@@ -383,57 +383,56 @@ class _SignupScreenState extends State<SignupScreen> {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value!)) {
       return 'Enter Valid Email';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validateMobile(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length != 10)
+    if (value!.length != 10) {
       return 'Mobile Number must be of 10 digit';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validateFirstname(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Username Field must not be empty';
-    // else if(value.length < 8)
-    //   return 'Password must be of 8 or more digit';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validateLastname(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Username Field must not be empty';
-    // else if(value.length < 8)
-    //   return 'Password must be of 8 or more digit';
-    else
+    } else {
       return null;
+    }
   }
 
 
 
   String? validateUsername(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Username Field must not be empty';
-    // else if(value.length < 8)
-    //   return 'Password must be of 8 or more digit';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validatePassword(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Password Field must not be empty';
-    else if (value.length < 8)
+    } else if (value.length < 8)
       return 'Password must be of 8 or more digit';
     else
       return null;
@@ -498,7 +497,7 @@ class _SignupScreenState extends State<SignupScreen> {
         // });
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
       } else if (res.statusCode == 400) {
         print('hhh');
         // setState(() {

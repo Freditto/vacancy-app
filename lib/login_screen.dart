@@ -8,7 +8,6 @@ import 'package:vacancies_app/api/api.dart';
 import 'package:vacancies_app/components/authentication_button.dart';
 import 'package:vacancies_app/components/constants.dart';
 import 'package:vacancies_app/components/curve.dart';
-import 'package:vacancies_app/components/custom_text_field.dart';
 import 'package:vacancies_app/home.dart';
 import 'package:vacancies_app/signup_screen.dart';
 
@@ -90,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AdminLoginScreen()));
+                                                  const AdminLoginScreen()));
                             },
                             child: Text(
                               'Welcome Back',
@@ -208,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
+                                        builder: (context) => const HomeScreen()));
                               },
                             ),
                             Padding(
@@ -231,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SignupScreen()));
+                                                  const SignupScreen()));
                                     },
                                     child: const Text(
                                       'Sign up',
@@ -259,27 +258,27 @@ class _LoginScreenState extends State<LoginScreen> {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value!))
+    if (!regex.hasMatch(value!)) {
       return 'Enter Valid Email';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validateUsername(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Username Field must not be empty';
-    // else if(value.length < 8)
-    //   return 'Password must be of 8 or more digit';
-    else
+    } else {
       return null;
+    }
   }
 
   String? validatePassword(String? value) {
 // Indian Mobile number are of 10 digit only
-    if (value!.length == 0)
+    if (value!.isEmpty) {
       return 'Password Field must not be empty';
-    else if (value.length < 8)
+    } else if (value.length < 8)
       return 'Password must be of 8 or more digit';
     else
       return null;
@@ -340,7 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // });
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       } else if (res.statusCode == 400) {
         print('hhh');
         // setState(() {

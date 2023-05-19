@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vacancies_app/utils/constant.dart';
 
 class Admin_Add_VacancyScreen extends StatefulWidget {
+  const Admin_Add_VacancyScreen({super.key});
+
   @override
   State<Admin_Add_VacancyScreen> createState() =>
       _Admin_Add_VacancyScreenState();
@@ -21,7 +22,7 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Job'),
+        title: const Text('Add Job'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: true,
@@ -106,7 +107,7 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
 
                       Container(
                       // padding: const EdgeInsets.all(0.0),
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 10.0, right: 10.0, top: 0, bottom: 0),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
@@ -116,13 +117,13 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
                         //elevation: 5,
                         // style: TextStyle(color: Colors.black),
 
-                        hint: Text('Select Tob Type'),
+                        hint: const Text('Select Tob Type'),
                         dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down),
+                        icon: const Icon(Icons.arrow_drop_down),
                         iconSize: 36,
                         isExpanded: true,
-                        underline: SizedBox(),
-                        style: TextStyle(color: Colors.black, fontSize: 15),
+                        underline: const SizedBox(),
+                        style: const TextStyle(color: Colors.black, fontSize: 15),
 
                         items: <String>[
                           'Full Time',
@@ -172,7 +173,7 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
                     //   ),
                     // );
                   },
-                  child: Text(
+                  child: const Text(
                     'Continue',
                     style: TextStyle(color: Colors.white),
                   ),

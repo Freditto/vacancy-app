@@ -18,12 +18,12 @@ class CallApi {
   // ignore: unused_element
   getJWTToken({context}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var _token = sharedPreferences.getString('refresh_token');
-    if (_token != null) {
-      var data = {"refresh": _token};
+    var token = sharedPreferences.getString('refresh_token');
+    if (token != null) {
+      var data = {"refresh": token};
       var res = await http.post(
           Uri.parse(
-            url + 'users/auth/token/refresh/',
+            '${url}users/auth/token/refresh/',
           ),
           body: jsonEncode(data),
           headers: {
@@ -53,16 +53,16 @@ class CallApi {
       try {
         showSnack(context, 'Unauthorized, please login again');
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
       } catch (e) {}
     }
   }
 
   _getNormalToken(context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var _token = sharedPreferences.getString('token');
-    if (_token != null) {
-      token = 'Token $_token';
+    var token = sharedPreferences.getString('token');
+    if (token != null) {
+      token = 'Token $token';
     } else {
       await _navigateHome(context: context);
     }
@@ -96,7 +96,7 @@ class CallApi {
     }
   }
 
-  authenticatedPostRequest(data, apiUrl, {context = null}) async {
+  authenticatedPostRequest(data, apiUrl, {context}) async {
     var fullUrl = url + apiUrl;
     await getToken(context);
     try {
@@ -113,7 +113,7 @@ class CallApi {
     }
   }
 
-  authenticatedGetRequest(apiUrl, {context = null}) async {
+  authenticatedGetRequest(apiUrl, {context}) async {
     await getToken(context);
     var fullUrl = url + apiUrl;
     try {
@@ -125,7 +125,7 @@ class CallApi {
     }
   }
 
-  authenticatedPutRequest(apiUrl, {context = null, data = null}) async {
+  authenticatedPutRequest(apiUrl, {context, data}) async {
     await getToken(context);
     var fullUrl = url + apiUrl;
     try {
@@ -138,7 +138,7 @@ class CallApi {
     }
   }
 
-  authenticatedDeleteRequest(apiUrl, {context = null}) async {
+  authenticatedDeleteRequest(apiUrl, {context}) async {
     await getToken(context);
     var fullUrl = url + apiUrl;
     try {
@@ -151,13 +151,13 @@ class CallApi {
   }
 
   authenticatedUploadRequest(data, apiUrl,
-      {context: null,
+      {context,
       int? uploaded,
       State? state,
-      String master_url: ''}) async {
+      String master_url = ''}) async {
     print(apiUrl);
-    var starte_url = master_url != '' ? master_url : url;
-    var fullUrl = starte_url + apiUrl;
+    var starteUrl = master_url != '' ? master_url : url;
+    var fullUrl = starteUrl + apiUrl;
     print(fullUrl);
     await getToken(context);
     try {
@@ -180,7 +180,7 @@ class CallApi {
     }
   }
 
-  authenticatedDownloadRequest(data, apiUrl, {context = null}) async {
+  authenticatedDownloadRequest(data, apiUrl, {context}) async {
     var fullUrl = url + apiUrl;
     await getToken(context);
     try {
@@ -197,7 +197,7 @@ class CallApi {
     }
   }
 
-  getRequest(apiUrl, {context = null}) async {
+  getRequest(apiUrl, {context}) async {
     var fullUrl = url + apiUrl;
     try {
       var res = await http.get(Uri.parse(fullUrl), headers: {
@@ -212,7 +212,7 @@ class CallApi {
   }
 
   postRequest(data, apiUrl,
-      {context = null, login: false, evaluate: true}) async {
+      {context, login = false, evaluate = true}) async {
     var fullUrl = url + apiUrl;
     try {
       var res = await http.post(
@@ -234,7 +234,7 @@ class CallApi {
     }
   }
 
-  putRequest(apiUrl, {context = null}) async {
+  putRequest(apiUrl, {context}) async {
     var fullUrl = url + apiUrl;
     try {
       return await http.put(Uri.parse(fullUrl), headers: {

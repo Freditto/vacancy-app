@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:vacancies_app/notification.dart';
-import 'package:vacancies_app/profile.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -32,7 +31,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Container(
+          child: SizedBox(
             height: 70,
             width: MediaQuery.of(context).size.width - 32,
             child: Row(
@@ -42,12 +41,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
                 Builder(builder: (context) => // Ensure Scaffold is in context
                 IconButton(
-                  icon: Icon(Icons.menu),
+                  icon: const Icon(Icons.menu),
                   onPressed: () => Scaffold.of(context).openDrawer()
                 )),
 
 
-                Text('Recruitment Portal', 
+                const Text('Recruitment Portal', 
                   style: TextStyle(fontSize: 16, color: Colors.black) ,
                 ),
 
@@ -65,24 +64,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => NotificationScreen()));
+                                      builder: (context) => const NotificationScreen()));
                             },
                             icon: const Image(
                               height: 24,
                               image: AssetImage("assets/notificon3.png"),
                             ),
                           ),
-                          Positioned(
-                            right: 0,
-                            child: badge.Badge(
-                              badgeContent: Text(
-                                '0',
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              badgeColor: Colors.red,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
+                          // Positioned(
+                          //   right: 0,
+                          //   child: badge.Badge(
+                          //     badgeContent: const Text(
+                          //       '0',
+                          //       style: TextStyle(color: Colors.white),
+                          //     ),
+                          //     badgeColor: Colors.red,
+                          //     borderRadius: BorderRadius.circular(4),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

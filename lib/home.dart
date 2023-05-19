@@ -8,15 +8,14 @@ import 'package:vacancies_app/aptitude_test.dart';
 import 'package:vacancies_app/components/appbar.dart';
 import 'package:vacancies_app/components/constants.dart';
 import 'package:vacancies_app/components/icon_text.dart';
-import 'package:vacancies_app/job_details.dart';
-import 'package:vacancies_app/job_item.dart';
 import 'package:vacancies_app/login_screen.dart';
 import 'package:vacancies_app/personal_cv.dart';
 import 'package:vacancies_app/profile.dart';
-import 'package:vacancies_app/utils/commons.dart';
 import 'package:vacancies_app/utils/snackbar.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -37,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       userData = user;
     });
-    fetchJobData();
+     
   }
 
   fetchJobData() async {
@@ -64,28 +63,28 @@ class _HomeScreenState extends State<HomeScreen> {
       var body = json.decode(res.body);
       print(body);
       var jobItensJson = body;
-      List<Job_Item> _job_items = [];
+      List<Job_Item> jobItems0 = [];
       if (next != null) {
-        _job_items = job_data!;
+        jobItems0 = job_data!;
       }
 
       for (var f in jobItensJson) {
-        Job_Item job_items = Job_Item(
+        Job_Item jobItems = Job_Item(
           f['id'].toString(),
           f['company'].toString(),
           f['jobTitle'].toString(),
           f['jobType'].toString(),
           f['requirements'],
         );
-        _job_items.add(job_items);
+        jobItems0.add(jobItems);
       }
-      print(_job_items.length);
+      print(jobItems0.length);
       // setState(() {
       //   loading = false;
       // });
 
       setState(() {
-        job_data = _job_items;
+        job_data = jobItems0;
        
       });
     } else {
@@ -99,14 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Change password'),
+            title: const Text('Change password'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Current Password',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // maxLines: widget.maxLines,
                     ),
                     const SizedBox(height: 8),
-                    Text(
+                    const Text(
                       'New Password',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -139,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -156,9 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             //     MaterialPageRoute(
                             //         builder: (context) => LoginScreen()));
                           },
-                          child: Text('Change')),
+                          child: const Text('Change')),
 
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
 
@@ -166,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel')),
+                          child: const Text('Cancel')),
                       // onPressed: () {
                       //   Navigator.of(context).pop();
                       // }
@@ -182,12 +181,12 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Logout'),
+            title: const Text('Logout'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  child: Text(
+                  child: const Text(
                     "Are you sure you want to logout",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -196,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -211,11 +210,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const LoginScreen()));
                           },
-                          child: Text('Yes')),
+                          child: const Text('Yes')),
 
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
 
@@ -223,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('No')),
+                          child: const Text('No')),
                       // onPressed: () {
                       //   Navigator.of(context).pop();
                       // }
@@ -243,14 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   // color: Colors.blue,
                   ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: Colors.white70,
                     minRadius: 40.0,
                     child: CircleAvatar(
@@ -258,12 +257,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundImage: AssetImage("assets/userx.jpg"),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
 
                   userData == null ?
-                  Text(
+                  const Text(
                     '',
                     style: TextStyle(
                       fontSize: 18,
@@ -275,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Text(
                     userData['username'].toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -283,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   userData == null ?
-                  Text(
+                  const Text(
                     '',
                     style: TextStyle(
                       color: Colors.black,
@@ -293,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   :
                   Text(
                     userData['email'].toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                     ),
@@ -302,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.person_outline,
               ),
               title: const Text('Profile'),
@@ -310,11 +309,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
 
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
+                    MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.edit,
               ),
               title: const Text('My Applications'),
@@ -326,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.notifications_outlined,
               ),
               title: const Text('Register to Job Alert'),
@@ -335,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.lock_outline,
               ),
               title: const Text('Change password'),
@@ -345,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.feedback_outlined,
               ),
               title: const Text('Feedback'),
@@ -354,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout_outlined,
               ),
               title: const Text('Logout'),
@@ -368,8 +367,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(70), child: CustomAppBar()),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(70), child: CustomAppBar()),
 
       // body: Column(
 
@@ -389,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           // Add your onPressed code here!
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Personal_CV_Screen()));
+              MaterialPageRoute(builder: (context) => const Personal_CV_Screen()));
         },
         label: const Text('Set or Update CV'),
         icon: const Icon(Icons.thumb_up),
@@ -400,17 +399,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   jobComponent() {
     if (job_data == null) {
-      return Center(
+      return const Center(
         child: Text('No Data...'),
       );
-    } else if (job_data != null && job_data?.length == 0) {
+    } else if (job_data != null && job_data!.isEmpty) {
       // No Data
-      return Center(
+      return const Center(
         child: Text('No Data or No jobs yet...'),
       );
     } else {
       return ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: job_data!.length,
@@ -420,7 +419,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // print(job_data![index].product_image);
 
             return Container(
-                margin: EdgeInsets.symmetric(vertical: 25),
+                margin: const EdgeInsets.symmetric(vertical: 25),
                 height: 160,
                 child: GestureDetector(
                     onTap: () {
@@ -431,9 +430,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context) => BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                           child: Container(
-                            padding: EdgeInsets.all(25),
+                            padding: const EdgeInsets.all(25),
                             height: 550,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(30),
@@ -452,7 +451,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Row(
@@ -464,7 +463,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Container(
                                                 height: 40,
                                                 width: 40,
-                                                padding: EdgeInsets.all(8),
+                                                padding: const EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -474,12 +473,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Image.asset(
                                                     'assets/apply.png'),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 job_data![index].company,
-                                                style: TextStyle(fontSize: 16),
+                                                style: const TextStyle(fontSize: 16),
                                               ),
                                             ],
                                           ),
@@ -494,32 +493,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   });
                                                 },
                                                 child: Container(
-                                                  child: Icon(Icons
+                                                  child: const Icon(Icons
                                                       .bookmark_outline_sharp),
                                                 ),
                                               ),
-                                              Icon(Icons.more_horiz_outlined),
+                                              const Icon(Icons.more_horiz_outlined),
                                             ],
                                           )
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
                                         job_data![index].jobTitle,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 26),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 15,
                                       ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          IconText(
+                                          const IconText(
                                             icon: Icons.location_on_outlined,
                                             text: 'Location',
                                           ),
@@ -529,46 +528,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
-                                      Text(
+                                      const Text(
                                         'Requirements',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                         textAlign: TextAlign.start,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       ...job_data![index]
-                                          .requirements!
+                                          .requirements
                                           .map(
                                             (e) => Container(
-                                              margin: EdgeInsets.symmetric(
+                                              margin: const EdgeInsets.symmetric(
                                                   vertical: 5),
                                               child: Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
-                                                    margin: EdgeInsets.fromLTRB(
+                                                    margin: const EdgeInsets.fromLTRB(
                                                         0, 10, 10, 0),
                                                     width: 5,
                                                     height: 5,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: Colors.black),
                                                   ),
                                                   ConstrainedBox(
-                                                    constraints: BoxConstraints(
+                                                    constraints: const BoxConstraints(
                                                         maxWidth: 400),
                                                   ),
                                                   Flexible(
                                                     child: Text(
                                                       e!['requirement'],
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           wordSpacing: 2.5,
                                                           height: 1.5),
                                                       overflow:
@@ -582,13 +581,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .toList(),
                                       Container(
                                         margin:
-                                            EdgeInsets.symmetric(vertical: 25),
+                                            const EdgeInsets.symmetric(vertical: 25),
                                         height: 45,
                                         width: double.maxFinite,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              primary: kDarkGreenColor,
+                                              elevation: 0, backgroundColor: kDarkGreenColor,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -602,7 +600,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     builder: (context) =>
                                                         AptitudeTestScreen(job_data![index].id, job_data![index].company,)));
                                           },
-                                          child: Text('Apply Now'),
+                                          child: const Text('Apply Now'),
                                         ),
                                       )
                                     ],
@@ -617,7 +615,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -633,19 +631,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.grey.withOpacity(0.1),
                                       ),
                                       child: Image.asset('assets/apply.png'),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       job_data![index].company,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           color: Colors.grey,
                                           fontWeight: FontWeight.bold,
@@ -663,16 +661,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Container(
                                       child:
-                                          Icon(Icons.bookmark_outline_sharp)),
+                                          const Icon(Icons.bookmark_outline_sharp)),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Text(
                               job_data![index].jobTitle,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             // SizedBox(height: 15),
                             IconText(

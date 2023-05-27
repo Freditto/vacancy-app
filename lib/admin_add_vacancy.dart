@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:vacancies_app/api/api.dart';
+import 'package:vacancies_app/utils/snackbar.dart';
 
 class Admin_Add_VacancyScreen extends StatefulWidget {
   const Admin_Add_VacancyScreen({super.key});
@@ -9,7 +13,6 @@ class Admin_Add_VacancyScreen extends StatefulWidget {
 }
 
 class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
-
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController companyController = TextEditingController();
@@ -17,6 +20,39 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
 
   String? chosenStatus;
 
+  _add_job_API() async {
+    var data = {
+      'company': companyController.text,
+      'jobTitle': jobtitleController.text,
+      'jobType': chosenStatus,
+    };
+
+    print(data);
+
+    var res =
+        await CallApi().authenticatedPostRequest(data, 'api/insertVacancy');
+    if (res == null) {
+      // setState(() {
+      //   _isLoading = false;
+      //   // _not_found = true;
+      // });
+      // showSnack(context, 'No Network!');
+    } else {
+      var body = json.decode(res!.body);
+      print(body);
+
+      if (res.statusCode == 200) {
+        showSnack(context, 'Job successfull added!');
+        Navigator.pop(context);
+      } else if (body['msg'] == 'fail') {
+        print('hhh');
+        // setState(() {
+        //   _isLoading = false;
+        //   _not_found = true;
+        // });
+      } else {}
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,85 +63,76 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
         foregroundColor: Colors.black,
         automaticallyImplyLeading: true,
         elevation: 0,
-
       ),
-
-
       body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 18, right: 18, top: 34),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-               
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: companyController,
-                        // validator: validateUsername,
-                        // keyboardType: TextInputType.phone,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              12,
-                            ),
-                            // borderSide: BorderSide.none,
-                            borderSide: const BorderSide(color: Colors.grey),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 18, right: 18, top: 34),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: companyController,
+                      // validator: validateUsername,
+                      // keyboardType: TextInputType.phone,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            12,
                           ),
-                          hintText: 'Company Name',
-                          hintStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
+                          // borderSide: BorderSide.none,
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        hintText: 'Company Name',
+                        hintStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
                         ),
                       ),
-              
-              
-                      const SizedBox(
-                        height: 30,
-                      ),
-              
-                      TextFormField(
-                        controller: jobtitleController,
-                        // validator: validatePassword,
-                        // keyboardType: TextInputType.phone,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              12,
-                            ),
-                            // borderSide: BorderSide.none,
-                            borderSide: const BorderSide(color: Colors.grey),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+                      controller: jobtitleController,
+                      // validator: validatePassword,
+                      // keyboardType: TextInputType.phone,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            12,
                           ),
-                          hintText: 'Job Title',
-                          hintStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
+                          // borderSide: BorderSide.none,
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        hintText: 'Job Title',
+                        hintStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
                         ),
                       ),
-
-                      const SizedBox(
-                        height: 30,
-                      ),
-
-                      Container(
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
                       // padding: const EdgeInsets.all(0.0),
                       padding: const EdgeInsets.only(
                           left: 10.0, right: 10.0, top: 0, bottom: 0),
@@ -123,7 +150,8 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
                         iconSize: 36,
                         isExpanded: true,
                         underline: const SizedBox(),
-                        style: const TextStyle(color: Colors.black, fontSize: 15),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 15),
 
                         items: <String>[
                           'Full Time',
@@ -148,54 +176,54 @@ class _Admin_Add_VacancyScreenState extends State<Admin_Add_VacancyScreen> {
                         },
                       ),
                     ),
-                    ],
-                  ),
+                  ],
                 ),
-              
-                const SizedBox(
-                  height: 30,
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              MaterialButton(
+                elevation: 0,
+                color: Colors.green,
+                height: 50,
+                minWidth: 500,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                onPressed: () {
+                  // _submit();
+                  // _login();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => AdminDasboard(),
+                  //   ),
+                  // );
+                  _add_job_API();
+                },
+                child: const Text(
+                  'Continue',
+                  style: TextStyle(color: Colors.white),
                 ),
-              
-                MaterialButton(
-                  elevation: 0,
-                  color: Colors.green,
-                  height: 50,
-                  minWidth: 500,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  onPressed: () {
-                    // _submit();
-                    // _login();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => AdminDasboard(),
-                    //   ),
-                    // );
-                  },
-                  child: const Text(
-                    'Continue',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              
-                // const SizedBox(
-                //   height: 200,
-                // ),
-              
-                // _contentOverView(),
-                // const SizedBox(
-                //   height: 30,
-                // ),
-              
-                const SizedBox(
-                  height: 30,
-                ),
-                
-              ],
-            ),
+              ),
+
+              // const SizedBox(
+              //   height: 200,
+              // ),
+
+              // _contentOverView(),
+              // const SizedBox(
+              //   height: 30,
+              // ),
+
+              const SizedBox(
+                height: 30,
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }

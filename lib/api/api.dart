@@ -52,8 +52,8 @@ class CallApi {
       sharedPreferences.remove('notifications');
       try {
         showSnack(context, 'Unauthorized, please login again');
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
       } catch (e) {}
     }
   }
@@ -116,6 +116,7 @@ class CallApi {
   authenticatedGetRequest(apiUrl, {context}) async {
     await getToken(context);
     var fullUrl = url + apiUrl;
+    print(fullUrl);
     try {
       var res = await http.get(Uri.parse(fullUrl), headers: _setHeaders());
       return evaluateResponseData(res, context);
@@ -151,10 +152,7 @@ class CallApi {
   }
 
   authenticatedUploadRequest(data, apiUrl,
-      {context,
-      int? uploaded,
-      State? state,
-      String master_url = ''}) async {
+      {context, int? uploaded, State? state, String master_url = ''}) async {
     print(apiUrl);
     var starteUrl = master_url != '' ? master_url : url;
     var fullUrl = starteUrl + apiUrl;
@@ -211,8 +209,7 @@ class CallApi {
     }
   }
 
-  postRequest(data, apiUrl,
-      {context, login = false, evaluate = true}) async {
+  postRequest(data, apiUrl, {context, login = false, evaluate = true}) async {
     var fullUrl = url + apiUrl;
     try {
       var res = await http.post(

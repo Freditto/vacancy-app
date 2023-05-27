@@ -204,10 +204,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 //   // Navigator.pushNamed(context, MainScreen.id);
                                 // }
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomeScreen()));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => const HomeScreen()));
                               },
                             ),
                             Padding(
@@ -326,7 +326,7 @@ class _LoginScreenState extends State<LoginScreen> {
       var body = json.decode(res!.body);
       print(body);
 
-      if (res.statusCode == 200) {
+      if (body['msg'] == 'success') {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         // localStorage.setString("token", body['token']);
         localStorage.setString("user", json.encode(body));
@@ -340,7 +340,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-      } else if (res.statusCode == 400) {
+      } else if (body['msg'] == 'fail') {
         print('hhh');
         // setState(() {
         //   _isLoading = false;

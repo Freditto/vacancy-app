@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vacancies_app/api/api.dart';
 import 'package:vacancies_app/components/authentication_button.dart';
 import 'package:vacancies_app/components/constants.dart';
-import 'package:vacancies_app/components/custom_text_field.dart';
 import 'package:vacancies_app/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -71,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       
                             TextFormField(
                                 controller: firstNameController,
-                                obscureText: true,
+                                // obscureText: true,
                                 validator: validateFirstname,
                                 // keyboardType: TextInputType.phone,
                                 style: Theme.of(context).textTheme.bodyMedium,
@@ -104,7 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                               TextFormField(
                                 controller: lastNameController,
-                                obscureText: true,
+                                // obscureText: true,
                                 validator: validateLastname,
                                 // keyboardType: TextInputType.phone,
                                 style: Theme.of(context).textTheme.bodyMedium,
@@ -137,7 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                               TextFormField(
                                 controller: userNameController,
-                                obscureText: true,
+                                // obscureText: true,
                                 validator: validateUsername,
                                 // keyboardType: TextInputType.phone,
                                 style: Theme.of(context).textTheme.bodyMedium,
@@ -170,7 +169,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       
                               TextFormField(
                                 controller: userEmailController,
-                                obscureText: true,
+                                // obscureText: true,
                                 validator: validateEmail,
                                 // keyboardType: TextInputType.phone,
                                 style: Theme.of(context).textTheme.bodyMedium,
@@ -267,31 +266,31 @@ class _SignupScreenState extends State<SignupScreen> {
                               //   ),
                               // ),
                       
-                            CustomTextField(
-                              hintText: 'Full Name',
-                              icon: Icons.person,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {},
-                            ),
-                            CustomTextField(
-                              hintText: 'Email',
-                              icon: Icons.mail,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {},
-                            ),
-                            CustomTextField(
-                              hintText: 'Password',
-                              icon: Icons.lock,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {},
-                            ),
-                            CustomTextField(
-                              hintText: 'Confirm Password',
-                              icon: Icons.lock,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {},
-                            ),
-                            const SizedBox(height: 15.0),
+                            // CustomTextField(
+                            //   hintText: 'Full Name',
+                            //   icon: Icons.person,
+                            //   keyboardType: TextInputType.name,
+                            //   onChanged: (value) {},
+                            // ),
+                            // CustomTextField(
+                            //   hintText: 'Email',
+                            //   icon: Icons.mail,
+                            //   keyboardType: TextInputType.name,
+                            //   onChanged: (value) {},
+                            // ),
+                            // CustomTextField(
+                            //   hintText: 'Password',
+                            //   icon: Icons.lock,
+                            //   keyboardType: TextInputType.name,
+                            //   onChanged: (value) {},
+                            // ),
+                            // CustomTextField(
+                            //   hintText: 'Confirm Password',
+                            //   icon: Icons.lock,
+                            //   keyboardType: TextInputType.name,
+                            //   onChanged: (value) {},
+                            // ),
+                            // const SizedBox(height: 15.0),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

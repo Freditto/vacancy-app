@@ -21,6 +21,10 @@ class _AdminDasboardState extends State<AdminDasboard> {
   List<Job_Item>? job_data;
 
   TextEditingController requirementController = TextEditingController();
+  TextEditingController questionController = TextEditingController();
+  TextEditingController answer_A_Controller = TextEditingController();
+  TextEditingController answer_B_Controller = TextEditingController();
+  TextEditingController answer_C_Controller = TextEditingController();
 
   @override
   void initState() {
@@ -32,8 +36,8 @@ class _AdminDasboardState extends State<AdminDasboard> {
   checkLoginStatus() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -115,9 +119,10 @@ class _AdminDasboardState extends State<AdminDasboard> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       InkWell(
-                          onTap: () {
-                            // _deleteSingleProductTocart(index);
-                            // logOUT_User();
+                          onTap: () async {
+                            SharedPreferences preferences =
+                                await SharedPreferences.getInstance();
+                            await preferences.clear();
                             Navigator.of(context).pop();
 
                             Navigator.push(
@@ -165,7 +170,7 @@ class _AdminDasboardState extends State<AdminDasboard> {
                     ),
                     onTap: () {
                       Navigator.pop(context);
-                      _add_requirement_Dialog(context);
+                      _add_requirement_Dialog(context, index);
                     }),
 
                 InkWell(
@@ -176,7 +181,7 @@ class _AdminDasboardState extends State<AdminDasboard> {
                     ),
                     onTap: () {
                       Navigator.pop(context);
-                      _add_question_Dialog(context);
+                      _add_question_Dialog(context, index);
                     }),
 
                 InkWell(
@@ -215,7 +220,7 @@ class _AdminDasboardState extends State<AdminDasboard> {
     );
   }
 
-  _add_requirement_Dialog(BuildContext context) {
+  _add_requirement_Dialog(BuildContext context, int id) {
     showDialog(
         context: context,
         builder: (context) {
@@ -261,7 +266,8 @@ class _AdminDasboardState extends State<AdminDasboard> {
                           onTap: () {
                             // _deleteSingleProductTocart(index);
                             // logOUT_User();
-                            Navigator.of(context).pop();
+                            _add_requirement_API(id);
+                            // Navigator.of(context).pop();
                           },
                           child: const Text('Yes')),
 
@@ -284,71 +290,301 @@ class _AdminDasboardState extends State<AdminDasboard> {
         });
   }
 
-  _add_question_Dialog(BuildContext context) {
+  _add_requirement_API(int id) async {
+    var data = {
+      'requirement': requirementController.text,
+      'vac_id': id,
+    };
+
+    print(data);
+
+    var res =
+        await CallApi().authenticatedPostRequest(data, 'api/addRequirement');
+    if (res == null) {
+      // setState(() {
+      //   _isLoading = false;
+      //   // _not_found = true;
+      // });
+      // showSnack(context, 'No Network!');
+    } else {
+      var body = json.decode(res!.body);
+      print(body);
+
+      if (res.statusCode == 200) {
+        showSnack(context, 'Question successfull added!');
+        Navigator.pop(context);
+      } else if (body['msg'] == 'fail') {
+        print('hhh');
+        // setState(() {
+        //   _isLoading = false;
+        //   _not_found = true;
+        // });
+      } else {}
+    }
+  }
+
+  _add_question_API(int id) async {
+    var data = questionsToAdd;
+
+    print(data);
+
+    var res = await CallApi()
+        .authenticatedPostRequest(data, 'api/setQuestion/' + id.toString());
+    if (res == null) {
+      // setState(() {
+      //   _isLoading = false;
+      //   // _not_found = true;
+      // });
+      // showSnack(context, 'No Network!');
+    } else {
+      var body = json.decode(res!.body);
+      print(body);
+
+      if (res.statusCode == 200) {
+        setState(() {
+          questionsToAdd = [];
+        });
+        showSnack(context, 'Question successfull added!');
+        Navigator.pop(context);
+      } else if (body['msg'] == 'fail') {
+        print('hhh');
+        // setState(() {
+        //   _isLoading = false;
+        //   _not_found = true;
+        // });
+      } else {}
+    }
+  }
+
+  List<Map<String, dynamic>>? questionsToAdd = [];
+  checkQuestion() {
+    // var ans_list = [1, 2, 3];
+    var stateA = false;
+    var stateB = false;
+    var stateC = false;
+    // const myPI = 3142;
+    // int r = (radians * 1000).round();
+
+    switch (_checked) {
+      case 1:
+        stateA = true;
+        break;
+      case 2:
+        stateB = true;
+        break;
+      case 3:
+        stateC = true;
+        break;
+    }
+    var answers = [
+      {'answer': answer_A_Controller.text, 'is_correct': stateA},
+      {'answer': answer_B_Controller.text, 'is_correct': stateB},
+      {'answer': answer_C_Controller.text, 'is_correct': stateC}
+    ];
+    var questions = {
+      'question': questionController.text,
+      'is_checkable': false,
+      'answer': answers
+    };
+    print(questions);
+    questionsToAdd!.add(questions);
+    setState(() {
+      questionController.clear();
+      answer_A_Controller.clear();
+      answer_B_Controller.clear();
+      answer_C_Controller.clear();
+    });
+  }
+
+  var _checked = 1;
+
+  _add_question_Dialog(BuildContext context, int id) {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: const Text('Question'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextFormField(
-                  maxLines: 5,
-                  controller: requirementController,
-                  // validator: validateUsername,
-                  // keyboardType: TextInputType.phone,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        12,
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: const Text('Question'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextFormField(
+                      maxLines: 5,
+                      controller: questionController,
+                      // validator: validateUsername,
+                      // keyboardType: TextInputType.phone,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            12,
+                          ),
+                          // borderSide: BorderSide.none,
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        hintText: 'Add Question here...',
+                        hintStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                       ),
-                      // borderSide: BorderSide.none,
-                      borderSide: const BorderSide(color: Colors.grey),
                     ),
-                    hintText: 'Add Question here...',
-                    hintStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
+                    const SizedBox(
+                      height: 15,
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      InkWell(
-                          onTap: () {
-                            // _deleteSingleProductTocart(index);
-                            // logOUT_User();
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Yes')),
-
-                      const SizedBox(
-                        width: 30,
+                    RadioListTile(
+                      title: TextFormField(
+                        controller: answer_A_Controller,
+                        // validator: validateUsername,
+                        // keyboardType: TextInputType.phone,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
+                            ),
+                            // borderSide: BorderSide.none,
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                          hintText: 'Answer A',
+                          hintStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
                       ),
+                      value: 1,
+                      groupValue: _checked,
+                      onChanged: (value) {
+                        setState(() {
+                          _checked = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    RadioListTile(
+                      title: TextFormField(
+                        controller: answer_B_Controller,
+                        // validator: validateUsername,
+                        // keyboardType: TextInputType.phone,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
+                            ),
+                            // borderSide: BorderSide.none,
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                          hintText: 'Answer B',
+                          hintStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                      value: 2,
+                      groupValue: _checked,
+                      onChanged: (value) {
+                        setState(() {
+                          _checked = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    RadioListTile(
+                      title: TextFormField(
+                        controller: answer_C_Controller,
+                        // validator: validateUsername,
+                        // keyboardType: TextInputType.phone,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
+                            ),
+                            // borderSide: BorderSide.none,
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                          hintText: 'Answer C',
+                          hintStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                      value: 3,
+                      groupValue: _checked,
+                      onChanged: (value) {
+                        setState(() {
+                          _checked = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          InkWell(
+                              onTap: () {
+                                // _deleteSingleProductTocart(index);
+                                // logOUT_User();
+                                checkQuestion();
+                                Navigator.of(context).pop();
+                                _add_question_Dialog(context, id);
+                              },
+                              child: const Text('Next question')),
 
-                      InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('No')),
-                      // onPressed: () {
-                      //   Navigator.of(context).pop();
-                      // }
-                    ])
-              ],
-            ),
+                          const SizedBox(
+                            width: 30,
+                          ),
+
+                          InkWell(
+                              onTap: () {
+                                checkQuestion();
+                                _add_question_API(id);
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Save question')),
+                          // onPressed: () {
+                          //   Navigator.of(context).pop();
+                          // }
+                        ])
+                  ],
+                ),
+              );
+            },
           );
         });
   }
@@ -424,7 +660,7 @@ class _AdminDasboardState extends State<AdminDasboard> {
                   // leading: Icon(Icons.person_2_outlined),
                   trailing: InkWell(
                       onTap: () {
-                        _show_Action_Dialog(index);
+                        _show_Action_Dialog(int.parse(job_data![index].id));
                       },
                       child: const Icon(Icons.more_vert))),
             );

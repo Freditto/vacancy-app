@@ -16,12 +16,11 @@ class Personal extends StatefulWidget {
 }
 
 class PersonalState extends State<Personal> {
-  static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerFirstName =
-      TextEditingController();
-  static TextEditingController controllerLastName = TextEditingController();
-  static TextEditingController controllerDateOfBirth =
-      TextEditingController();
+  static final formKeyPersonal = GlobalKey<FormState>();
+  // static TextEditingController controllerFirstName =
+  //     TextEditingController();
+  // static TextEditingController controllerLastName = TextEditingController();
+  static TextEditingController controllerDateOfBirth = TextEditingController();
   static TextEditingController controllerGender = TextEditingController();
 
   static TextEditingController controllerEmail = TextEditingController();
@@ -33,52 +32,52 @@ class PersonalState extends State<Personal> {
     // TODO: implement build
     return Container(
         child: Form(
-      key: formKey,
+      key: formKeyPersonal,
       // autovalidateMode: false,
       child: Column(
         children: <Widget>[
-          TextFormField(
-            maxLines: 1,
-            controller: controllerFirstName,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.person,
-                color: Colors.grey,
-              ),
-              hintText: 'First Name',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-            validator: (value) {
-              return null;
-            
-              // if (value.trim().isEmpty) {
-              //   return "First Name is Required";
-              // }
-            },
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-              maxLines: 1,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: Colors.grey,
-                ),
-                hintText: 'Last Name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-              ),
-              validator: (value) {
-                return null;
-              
-                // if (value.trim().isEmpty) {
-                //   return "Last Name is Required";
-                // }
-              },
-              controller: controllerLastName),
+          // TextFormField(
+          //   maxLines: 1,
+          //   controller: controllerFirstName,
+          //   decoration: const InputDecoration(
+          //     prefixIcon: Icon(
+          //       Icons.person,
+          //       color: Colors.grey,
+          //     ),
+          //     hintText: 'First Name',
+          //     border: OutlineInputBorder(
+          //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          //     ),
+          //   ),
+          //   validator: (value) {
+          //     return null;
+
+          //     // if (value.trim().isEmpty) {
+          //     //   return "First Name is Required";
+          //     // }
+          //   },
+          // ),
+          // const SizedBox(height: 20),
+          // TextFormField(
+          //     maxLines: 1,
+          //     decoration: const InputDecoration(
+          //       prefixIcon: Icon(
+          //         Icons.person,
+          //         color: Colors.grey,
+          //       ),
+          //       hintText: 'Last Name',
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          //       ),
+          //     ),
+          //     validator: (value) {
+          //       return null;
+
+          //       // if (value.trim().isEmpty) {
+          //       //   return "Last Name is Required";
+          //       // }
+          //     },
+          //     controller: controllerLastName),
           const SizedBox(height: 20),
           TextFormField(
               maxLines: 1,
@@ -134,118 +133,28 @@ class PersonalState extends State<Personal> {
                 ),
               ),
               controller: controllerGender),
-          const SizedBox(height: 20),
-          TextFormField(
-            maxLines: 1,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.grey,
-              ),
-              hintText: 'Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-            validator: (value) {
-              return null;
-            
-              // if (value.trim().isEmpty) {
-              //   return "Email is Required";
-              // }
-            },
-            controller: controllerEmail,
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-            maxLines: 1,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.phone,
-                color: Colors.grey,
-              ),
-              hintText: 'Mobile No',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-            validator: (value) {
-              return null;
-            
-              // if (value.trim().isEmpty) {
-              //   return "Mobile No is Required";
-              // }
-            },
-            controller: controllerMobileNo,
-          ),
-        ],
-      ),
-    ));
-  }
-}
+          // const SizedBox(height: 20),
+          // TextFormField(
+          //   maxLines: 1,
+          //   decoration: const InputDecoration(
+          //     prefixIcon: Icon(
+          //       Icons.email,
+          //       color: Colors.grey,
+          //     ),
+          //     hintText: 'Email',
+          //     border: OutlineInputBorder(
+          //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          //     ),
+          //   ),
+          //   validator: (value) {
+          //     return null;
 
-class Contact extends StatefulWidget {
-  const Contact({super.key});
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return ContactState();
-  }
-}
-
-class ContactState extends State<Contact> {
-  static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = TextEditingController();
-  static TextEditingController controllerAddress = TextEditingController();
-  static TextEditingController controllerMobileNo = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-        child: Form(
-      key: formKey,
-      // autovalidate: false,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            maxLines: 1,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.grey,
-              ),
-              hintText: 'Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-            validator: (value) {
-              return null;
-            
-              // if (value.trim().isEmpty) {
-              //   return "Email is Required";
-              // }
-            },
-            controller: controllerEmail,
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-            minLines: 5,
-            maxLines: 7,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(
-                Icons.home,
-                color: Colors.grey,
-              ),
-              hintText: 'Address',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-            ),
-            controller: controllerAddress,
-          ),
+          //     // if (value.trim().isEmpty) {
+          //     //   return "Email is Required";
+          //     // }
+          //   },
+          //   controller: controllerEmail,
+          // ),
           const SizedBox(height: 20),
           TextFormField(
             maxLines: 1,
@@ -261,7 +170,7 @@ class ContactState extends State<Contact> {
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
@@ -278,25 +187,29 @@ class Professional_Qualification extends StatefulWidget {
   const Professional_Qualification({super.key});
 
   @override
-  State<Professional_Qualification> createState() =>
-      _Professional_QualificationState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return Professional_QualificationState();
+  }
+
+  
 }
 
-class _Professional_QualificationState
+class Professional_QualificationState
     extends State<Professional_Qualification> {
-  static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = TextEditingController();
-  static TextEditingController controllerAddress = TextEditingController();
-  static TextEditingController controllerMobileNo = TextEditingController();
+  static final formKeyProfessional = GlobalKey<FormState>();
+  static TextEditingController controllerOLevelIndex = TextEditingController();
+  static TextEditingController controllerProgramName = TextEditingController();
+  static TextEditingController controllerCountry = TextEditingController();
 
-  String? chooseEducationValue;
+  static String? chooseEducationValue;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
         child: Form(
-      key: formKey,
+      key: formKeyProfessional,
       // autovalidate: false,
       child: Column(
         children: <Widget>[
@@ -314,19 +227,19 @@ class _Professional_QualificationState
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
-            controller: controllerEmail,
+            controller: controllerOLevelIndex,
           ),
           const SizedBox(height: 20),
 
           Container(
             // padding: const EdgeInsets.all(0.0),
-            padding:
-                const EdgeInsets.only(left: 10.0, right: 10.0, top: 0, bottom: 0),
+            padding: const EdgeInsets.only(
+                left: 10.0, right: 10.0, top: 0, bottom: 0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(12)),
@@ -384,12 +297,12 @@ class _Professional_QualificationState
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
             },
-            controller: controllerMobileNo,
+            controller: controllerProgramName,
           ),
 
           const SizedBox(height: 20),
@@ -408,12 +321,12 @@ class _Professional_QualificationState
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Mobile No is Required";
               // }
             },
-            controller: controllerMobileNo,
+            controller: controllerCountry,
           ),
 
           // TextFormField(
@@ -442,17 +355,19 @@ class WorkingExperience extends StatefulWidget {
   const WorkingExperience({super.key});
 
   @override
-  State<WorkingExperience> createState() => _WorkingExperienceState();
+  State<WorkingExperience> createState() => WorkingExperienceState();
 }
 
-class _WorkingExperienceState extends State<WorkingExperience> {
-  static final formKey = GlobalKey<FormState>();
-  static TextEditingController controllerEmail = TextEditingController();
-  static TextEditingController controllerAddress = TextEditingController();
-  static TextEditingController controllerMobileNo = TextEditingController();
-
-  static TextEditingController controllerStartDate =
+class WorkingExperienceState extends State<WorkingExperience> {
+  static final formKeyWorkingExperience = GlobalKey<FormState>();
+  static TextEditingController controllerJobTitle = TextEditingController();
+  static TextEditingController controllerinstitution = TextEditingController();
+  static TextEditingController controllerSupervisorName =
       TextEditingController();
+  static TextEditingController controllerSupervisorContact =
+      TextEditingController();
+
+  static TextEditingController controllerStartDate = TextEditingController();
 
   static TextEditingController controllerEndiDate = TextEditingController();
 
@@ -463,7 +378,7 @@ class _WorkingExperienceState extends State<WorkingExperience> {
     // TODO: implement build
     return Container(
         child: Form(
-      key: formKey,
+      key: formKeyWorkingExperience,
       // autovalidate: false,
       child: Column(
         children: <Widget>[
@@ -481,12 +396,12 @@ class _WorkingExperienceState extends State<WorkingExperience> {
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
-            controller: controllerEmail,
+            controller: controllerJobTitle,
           ),
           const SizedBox(height: 20),
 
@@ -504,12 +419,12 @@ class _WorkingExperienceState extends State<WorkingExperience> {
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
-            controller: controllerEmail,
+            controller: controllerinstitution,
           ),
           const SizedBox(height: 20),
 
@@ -527,12 +442,12 @@ class _WorkingExperienceState extends State<WorkingExperience> {
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
-            controller: controllerEmail,
+            controller: controllerSupervisorName,
           ),
           const SizedBox(height: 20),
 
@@ -550,12 +465,12 @@ class _WorkingExperienceState extends State<WorkingExperience> {
             ),
             validator: (value) {
               return null;
-            
+
               // if (value.trim().isEmpty) {
               //   return "Email is Required";
               // }
             },
-            controller: controllerEmail,
+            controller: controllerSupervisorContact,
           ),
           const SizedBox(height: 20),
 
@@ -669,13 +584,13 @@ class FileUploads extends StatefulWidget {
   const FileUploads({super.key});
 
   @override
-  State<FileUploads> createState() => _FileUploadsState();
+  State<FileUploads> createState() => FileUploadsState();
 }
 
-class _FileUploadsState extends State<FileUploads> {
-
+class FileUploadsState extends State<FileUploads> {
   _selecFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: false);
 
     if (result != null) {
       List<File> files = result.paths.map((path) => File(path!)).toList();
@@ -685,56 +600,135 @@ class _FileUploadsState extends State<FileUploads> {
       // User canceled the picker
     }
   }
+
+  static final formKeyFileUpload = GlobalKey<FormState>();
+
+  var userData;
+  var rootid;
+  var result;
+  var status;
+
+  var fileName;
+
+  // selectFile() async {
+  //   final result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowedExtensions: ['pdf'],
+  //     allowMultiple: false,
+  //   );
+
+  //   if (result == null) {
+  //     return;
+  //   } else {
+  //     file = File(result.files.single.path!);
+
+  //     // List<File> files = result.paths.map((path) => File(path!)).toList();
+
+  //     // print(result.files.single.path);
+  //     print(file);
+
+  //     setState(() {
+  //       // file = File(path);
+  //       // uploadFilePhaseZero();
+  //     });
+
+  //     print("file============$file");
+  //     print("path============${file!.path}");
+  //     // print("file============"+file!);
+
+  //     // uploadFilePhaseOneDio();
+
+  //     Navigator.of(this.context).push(
+  //         MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
+  //   }
+
+  //   // ignore: unnecessary_null_comparison
+  //   if (file!.path == null) {}
+  // }
+
+  static File? file;
+
+  selectFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result == null) {
+      return;
+    } else {
+
+      // List<File> files = result.paths.map((path) => File(path!)).toList();
+
+      // print(result.files.single.path);
+      print(file);
+
+      setState(() {
+      file = File(result.files.single.path!);
+        // file = File(path);
+        // uploadFile();
+      });
+
+      print("file============" + file.toString());
+      print("path============" + file!.path.toString());
+      // print("file============"+file!);
+
+      // uploadFilePhaseOneDio();
+    }
+
+    if (file!.path == null) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 10, right: 10, left: 10),
-            child: DottedBorder(
-              color: Colors.grey,
-              strokeWidth: 2,
-              borderType: BorderType.RRect,
-              radius: const Radius.circular(8),
-              dashPattern: const [15, 10],
-              child: GestureDetector(
-                onTap: () {
-                  _selecFiles();
-                },
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        100,
+          Form(
+            key: formKeyFileUpload,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
+              child: DottedBorder(
+                color: Colors.grey,
+                strokeWidth: 2,
+                borderType: BorderType.RRect,
+                radius: const Radius.circular(8),
+                dashPattern: const [15, 10],
+                child: GestureDetector(
+                  onTap: () {
+                    // _selecFiles();
+                    selectFile();
+                  },
+                  child: Center(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          100,
+                        ),
+                        color: Colors.grey[300],
                       ),
-                      color: Colors.grey[300],
-                    ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // SvgPicture.asset(
-                        //   'assets/image.svg',
-                        //   width: 32,
-                        //   color: Colors.black,
-                        // ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'No pdf file Selected',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SvgPicture.asset(
+                          //   'assets/image.svg',
+                          //   width: 32,
+                          //   color: Colors.black,
+                          // ),
+                          SizedBox(
+                            height: 4,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                          Text(
+                            'No pdf file Selected',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

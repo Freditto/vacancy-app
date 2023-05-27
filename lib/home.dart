@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   checkLoginStatus() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -47,7 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       userData = user;
     });
-     
+
+    fetchJobData();
   }
 
   fetchJobData() async {
@@ -85,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
       setState(() {
         job_data = jobItems0;
-       
       });
     } else {
       showSnack(context, 'No network');
@@ -202,9 +202,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       InkWell(
-                          onTap: () {
-                            // _deleteSingleProductTocart(index);
-                            // logOUT_User();
+                          onTap: () async {
+                            SharedPreferences preferences =
+                                await SharedPreferences.getInstance();
+                            await preferences.clear();
                             Navigator.of(context).pop();
 
                             Navigator.push(
@@ -260,43 +261,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-
-                  userData == null ?
-                  const Text(
-                    '',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  )
-                  :
-
-                  Text(
-                    userData['username'].toString(),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  userData == null ?
-                  const Text(
-                    '',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  )
-                  :
-                  Text(
-                    userData['email'].toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
+                  userData == null
+                      ? const Text(
+                          '',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        )
+                      : Text(
+                          userData['username'].toString(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                  userData == null
+                      ? const Text(
+                          '',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        )
+                      : Text(
+                          userData['email'].toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -308,8 +304,10 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 Navigator.pop(context);
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
               },
             ),
             ListTile(
@@ -319,9 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: const Text('My Applications'),
               onTap: () {
                 Navigator.pop(context);
-                setState(() {
-                  
-                });
+                setState(() {});
               },
             ),
             ListTile(
@@ -387,8 +383,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Personal_CV_Screen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const Personal_CV_Screen()));
         },
         label: const Text('Set or Update CV'),
         icon: const Icon(Icons.thumb_up),
@@ -463,7 +461,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Container(
                                                 height: 40,
                                                 width: 40,
-                                                padding: const EdgeInsets.all(8),
+                                                padding:
+                                                    const EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -478,7 +477,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               Text(
                                                 job_data![index].company,
-                                                style: const TextStyle(fontSize: 16),
+                                                style: const TextStyle(
+                                                    fontSize: 16),
                                               ),
                                             ],
                                           ),
@@ -497,7 +497,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .bookmark_outline_sharp),
                                                 ),
                                               ),
-                                              const Icon(Icons.more_horiz_outlined),
+                                              const Icon(
+                                                  Icons.more_horiz_outlined),
                                             ],
                                           )
                                         ],
@@ -545,24 +546,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .requirements
                                           .map(
                                             (e) => Container(
-                                              margin: const EdgeInsets.symmetric(
-                                                  vertical: 5),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5),
                                               child: Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
-                                                    margin: const EdgeInsets.fromLTRB(
-                                                        0, 10, 10, 0),
+                                                    margin: const EdgeInsets
+                                                        .fromLTRB(0, 10, 10, 0),
                                                     width: 5,
                                                     height: 5,
-                                                    decoration: const BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: Colors.black),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                Colors.black),
                                                   ),
                                                   ConstrainedBox(
-                                                    constraints: const BoxConstraints(
-                                                        maxWidth: 400),
+                                                    constraints:
+                                                        const BoxConstraints(
+                                                            maxWidth: 400),
                                                   ),
                                                   Flexible(
                                                     child: Text(
@@ -580,13 +586,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           )
                                           .toList(),
                                       Container(
-                                        margin:
-                                            const EdgeInsets.symmetric(vertical: 25),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 25),
                                         height: 45,
                                         width: double.maxFinite,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                              elevation: 0, backgroundColor: kDarkGreenColor,
+                                              elevation: 0,
+                                              backgroundColor: kDarkGreenColor,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -598,7 +605,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        AptitudeTestScreen(job_data![index].id, job_data![index].company,)));
+                                                        AptitudeTestScreen(
+                                                          job_data![index].id,
+                                                          job_data![index]
+                                                              .company,
+                                                        )));
                                           },
                                           child: const Text('Apply Now'),
                                         ),
@@ -660,8 +671,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     });
                                   },
                                   child: Container(
-                                      child:
-                                          const Icon(Icons.bookmark_outline_sharp)),
+                                      child: const Icon(
+                                          Icons.bookmark_outline_sharp)),
                                 ),
                               ],
                             ),
@@ -670,7 +681,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Text(
                               job_data![index].jobTitle,
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             // SizedBox(height: 15),
                             IconText(

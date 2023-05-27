@@ -163,14 +163,14 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                   onPressed: () {
-                    // _submit();
+                    _submit();
                     // _login();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AdminDasboard(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const AdminDasboard(),
+                      // ),
+                    // );
                   },
                   child: const Text(
                     'Continue',
@@ -260,7 +260,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
 
     print(data);
 
-    var res = await CallApi().authenticatedPostRequest(data, 'auth/login');
+    var res = await CallApi().authenticatedPostRequest(data, 'login');
     if (res == null) {
       // setState(() {
       //   _isLoading = false;
@@ -271,11 +271,11 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
       var body = json.decode(res!.body);
       print(body);
 
-      if (res.statusCode == 200) {
+      if (body['msg'] == 'success') {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         // localStorage.setString("token", body['token']);
         localStorage.setString("user", json.encode(body));
-        localStorage.setString("token", json.encode(body['access']));
+        localStorage.setString("token", json.encode(body['token']));
         // localStorage.setString("stationary", json.encode(body['stationary']));
         // localStorage.setString("phone_number", userNumberController.text);
 
@@ -285,7 +285,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
 
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const AdminDasboard()));
-      } else if (res.statusCode == 400) {
+      } else if (body['msg'] == 'fail') {
         print('hhh');
         // setState(() {
         //   _isLoading = false;

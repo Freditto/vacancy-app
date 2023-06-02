@@ -8,9 +8,10 @@ import 'package:vacancies_app/login_screen.dart';
 import 'package:vacancies_app/utils/snackbar.dart';
 
 class CallApi {
-  // static final String url = 'https://gnmcargo.com/cargo/';
-  // static final String url = 'http://192.168.100.21:8000/cargo/';
+
+  // static const String url = 'http://157.230.82.95:8001/';
   static const String url = 'http://192.168.100.26:8001/';
+
   static const String media_url = 'http://68.183.5.97:5000/media/v1/';
   static const String flask_microservice_url = 'http://68.183.5.97:3000/';
   var token = '';

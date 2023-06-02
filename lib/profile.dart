@@ -195,6 +195,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          userData == null ?
+                          Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
                           Text(
                             userData['first_name'].toString() +
                                 ' ' +
@@ -224,6 +234,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          userData == null ?
+                          Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
                           Text(
                             userData['email'].toString(),
                             style: TextStyle(
@@ -251,6 +271,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+
+                          profile_data == null ?
+                          Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
                           Text(
                             profile_data!['gender'].toString(),
                             style: TextStyle(
@@ -276,8 +307,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            '+255786985783',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['phone'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -303,14 +344,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Fullname',
+                            'O-Level Index No',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -320,8 +361,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'Firstname Lastname',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['o_level_index'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -337,7 +388,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Email',
+                            'Education',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -347,8 +398,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'email@example.com',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['education_level'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -364,7 +425,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Gender',
+                            'Program',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -374,8 +435,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'Male',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['program'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -389,7 +460,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Phone Nmuber',
+                            'Country',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -399,8 +470,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            '+255786985783',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['country'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -414,129 +495,129 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              const Text(
-                'Language Preferences',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Fullname',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Firstname Lastname',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Email',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'email@example.com',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Gender',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Male',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Phone Nmuber',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '+255786985783',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                    ],
-                  ),
-                ),
-              ),
+              // const Text(
+              //   'Language Preferences',
+              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Container(
+              //     padding: const EdgeInsets.all(20),
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(30),
+              //     ),
+              //     child: const Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Fullname',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //             SizedBox(
+              //               width: 10,
+              //             ),
+              //             Text(
+              //               'Firstname Lastname',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(
+              //           height: 15,
+              //         ),
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Email',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //             SizedBox(
+              //               width: 10,
+              //             ),
+              //             Text(
+              //               'email@example.com',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(
+              //           height: 15,
+              //         ),
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Gender',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //             SizedBox(
+              //               width: 10,
+              //             ),
+              //             Text(
+              //               'Male',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(height: 15),
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Phone Nmuber',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //             SizedBox(
+              //               width: 10,
+              //             ),
+              //             Text(
+              //               '+255786985783',
+              //               style: TextStyle(
+              //                   fontSize: 16,
+              //                   color: Colors.grey,
+              //                   fontWeight: FontWeight.bold,
+              //                   overflow: TextOverflow.ellipsis),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(height: 15),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               const Text(
                 'Working Experience',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -549,14 +630,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Fullname',
+                            'Job Title',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -566,8 +647,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'Firstname Lastname',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['last_job_title'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -583,7 +674,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Email',
+                            'Institution',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -593,8 +684,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'email@example.com',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['institute_name'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -610,7 +711,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Gender',
+                            'Supervisor',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -620,8 +721,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            'Male',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['supervisor_name'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -635,7 +746,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Phone Nmuber',
+                            'Supervisor Contact',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -645,8 +756,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: 10,
                           ),
+                          profile_data == null ?
                           Text(
-                            '+255786985783',
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['supervisor_contact'].toString(),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Start Date',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          profile_data == null ?
+                          Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['starting_date'].toString(),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'End Date',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          profile_data == null ?
+                          Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                          :
+                          Text(
+                            profile_data!['end_date'].toString(),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,

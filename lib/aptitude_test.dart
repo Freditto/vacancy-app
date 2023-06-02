@@ -12,10 +12,7 @@ class AptitudeTestScreen extends StatefulWidget {
   final String jobid, company;
 
   // bool is_secured, is_folder;
-  const AptitudeTestScreen(
-    this.jobid,
-    this.company, {super.key}
-  );
+  const AptitudeTestScreen(this.jobid, this.company, {super.key});
 
   @override
   State<AptitudeTestScreen> createState() => _AptitudeTestScreenState();
@@ -23,6 +20,7 @@ class AptitudeTestScreen extends StatefulWidget {
 
 class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
   var userData, next;
+  var questionResults;
 
   List<Question_Item>? question_data;
 
@@ -36,8 +34,8 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
   checkLoginStatus() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -92,6 +90,94 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
     }
   }
 
+  void _postAptitudeResults() async {
+// *******************************************************
+    var data = questionResults;
+
+    print(data);
+
+    var res = await CallApi().authenticatedPostRequest(data, 'api/setAnswer/'+userData['user_id'].toString());
+    if (res == null) {
+    } else {
+      var body = json.decode(res!.body);
+      print(body);
+
+      if (res.statusCode == 200) {
+        if (body['success'] == true) {
+          _successDialog(context, body['percent'].toString(), body['status']);
+        } else if (body['success'] == false) {
+          _failedDialog(context, body['message']);
+        }
+      } else if (res.statusCode == 400) {
+        print('hhh');
+        // setState(() {
+        //   _isLoading = false;
+        //   _not_found = true;
+        // });
+      } else {}
+    }
+
+    // ignore: avoid_print
+  }
+
+  _successDialog(BuildContext context, String percent, String status) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Success'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    "Percent scored : $percent% Status :$status",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                
+              ],
+            ),
+          );
+        });
+  }
+
+  _failedDialog(BuildContext context, String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Success'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +194,46 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                 final task = snapshot.data!;
                 return step.SurveyKit(
                   onResult: (step.SurveyResult result) {
-                    print(result.finishReason);
+                    print(snapshot.data!.toJson()['steps'][1]['title']);
+                    print(snapshot.data!.toJson()['steps'].length);
+                    print(result.results.length);
+
+                    print("_________________");
+                    //for answer
+                    print(result.results[5].results[0].result.value);
+                    // print(result.results[1].results[0]);
+                    var questionResult = [];
+                    print("object ----------");
+                    print(snapshot.data!.toJson()['steps'].length);
+
+                    for (int x = 0;
+                        x < snapshot.data!.toJson()['steps'].length;
+                        x++) {
+                      if (x == 0) {
+                        print('at 0 --------');
+                        continue;
+                      } else if (x ==
+                          snapshot.data!.toJson()['steps'].length - 1) {
+                        continue;
+                      } else {
+                        questionResult.add({
+                          'question_id': snapshot.data!.toJson()['steps'][x]
+                              ['title'],
+                          'answer_id': result.results[x].results[0].result.value
+                        });
+                      }
+                    }
+                    var dataToSend = {
+                      'vac_id': int.parse(widget.jobid),
+                      'user_id': userData['user_id'],
+                      'answers': questionResult
+                    };
+                    setState(() {
+                      questionResults = dataToSend;
+                    });
+                    print(dataToSend);
+                    _postAptitudeResults();
+
                     Navigator.pop(context);
                   },
                   task: task,
@@ -172,7 +297,10 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                                     color: Colors.black,
                                   );
                             }
-                            return Theme.of(context).textTheme.labelLarge?.copyWith(
+                            return Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
                                   color: Colors.black,
                                 );
                           },
@@ -210,11 +338,14 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
                       labelStyle: TextStyle(
                         color: Colors.black,
                       ),
-                    ), colorScheme: ColorScheme.fromSwatch(
+                    ),
+                    colorScheme: ColorScheme.fromSwatch(
                       primarySwatch: Colors.cyan,
-                    ).copyWith(
-                      onPrimary: Colors.white,
-                    ).copyWith(background: Colors.white),
+                    )
+                        .copyWith(
+                          onPrimary: Colors.white,
+                        )
+                        .copyWith(background: Colors.white),
                   ),
                   surveyProgressbarConfiguration:
                       step.SurveyProgressConfiguration(
@@ -241,8 +372,9 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
 
     for (Question_Item question in await fetchQuestionData()!) {
       widgets.add(step.QuestionStep(
-        title: '',
+        title: question.id.toString(),
         text: question.question,
+        // value: ,
         isOptional: false,
         answerFormat: step.SingleChoiceAnswerFormat(
           textChoices: await answers(question.answer),
@@ -258,9 +390,9 @@ class _AptitudeTestScreenState extends State<AptitudeTestScreen> {
     widgets.add(
       step.CompletionStep(
         stepIdentifier: step.StepIdentifier(id: '321'),
-        text: 'Thanks for taking the survey, we will contact you soon!',
+        text: 'Thanks for taking the aptitude test, we will contact you soon!',
         title: 'Done!',
-        buttonText: 'Submit survey',
+        buttonText: 'Submit',
       ),
     );
     print(widgets);
